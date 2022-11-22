@@ -30,4 +30,4 @@ jobs:
           charts_dir: jupyterhub
         env:
           CR_TOKEN: "${{ secrets.TOKEN }}"
-          CR_SKIP_EXISTING: false
+          CR_SKIP_EXISTING: false 
