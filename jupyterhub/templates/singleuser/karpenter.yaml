@@ -3,13 +3,14 @@ apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
 metadata:
   name: {{ include "jupyterhub.singleuser.fullname" . }}
-  labels: {{ include "jupyterhub.labels" . | nindent 4 }}
+  labels: 
+    {{- include "jupyterhub.labels" . | nindent 4 }}
 spec:
   ttlSecondsUntilExpired: 2592000 # 30 Days=60*60*24*30 Seconds;
   ttlSecondsAfterEmpty: 30
   taints:
     - key: app
-      value: uaudit
+      value: {{ .Values.karpenter.requirements.appValue }}
       effect: NoSchedule
   labels:
     provisioned: karpenter
@@ -28,11 +29,11 @@ spec:
       values: {{ .Values.karpenter.capacityTypes }} #["spot", "on-demand"]
   limits:
     resources:
-      cpu: <cpu>
-      memory: <memory>
+      cpu: {{ .Values.karpenter.limits.cpu }} #<cpu>
+      memory: {{ .Values.karpenter.limits.memory }} #<memory>
   provider:
     subnetSelector:
-      "karpenter.sh/discovery/<cluster>" : "<cluster>"
+      {{ .Values.karpenter.provider.subnetSelector }} #"karpenter.sh/discovery/<cluster>" : "<cluster>"
     securityGroupSelector:
-      "karpenter.sh/discovery/<cluster>" : "<cluster>"
+      {{ .Values.karpenter.provider.securityGroupSelector }} #"karpenter.sh/discovery/<cluster>" : "<cluster>"
 {{- end }}
