@@ -319,13 +319,13 @@ proxy:
 # singleuser relates to the configuration of KubeSpawner which runs in the hub
 # pod, and its spawning of user pods such as jupyter-myusername.
 karpenter:
-  enabled: true
+  enabled: false
   requirements:
     appValue:
-    instanceTypes:
-    regions: 
-    arch: 
-    capacityTypes: 
+    instanceTypes: []
+    regions: []
+    arch: []
+    capacityTypes: []
   limits:
     cpu:
     memory:
