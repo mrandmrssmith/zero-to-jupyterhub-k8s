@@ -36,4 +36,4 @@ spec:
       {{ .Values.karpenter.provider.subnetSelector }} 
     securityGroupSelector:
       {{ .Values.karpenter.provider.securityGroupSelector }} 
-{{- end }}
+{{- end }} 
