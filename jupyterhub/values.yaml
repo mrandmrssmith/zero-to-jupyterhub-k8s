@@ -320,12 +320,17 @@ proxy:
 # pod, and its spawning of user pods such as jupyter-myusername.
 karpenter:
   enabled: false
-  instanceTypes:
+  requirements:
+    instanceTypes:
+    regions: 
+    arch:
+    capacityTypes:
+  
 
 singleuser:
   podNameTemplate:
-  #extraTolerations: []
-  #nodeSelector: {}
+  extraTolerations: []
+  nodeSelector: {}
   extraNodeAffinity:
     required: []
     preferred: []
