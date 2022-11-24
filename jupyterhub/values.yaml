@@ -330,7 +330,7 @@ karpenter:
     cpu:
     memory:
   provider:
-    subnetSelector:
+    subnetSelector: {}
 
 singleuser:
   podNameTemplate:
