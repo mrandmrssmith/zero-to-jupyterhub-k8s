@@ -12,10 +12,6 @@ spec:
     - key: app
       value: {{ .Values.karpenter.requirements.appValue }}
       effect: NoSchedule
-  tolerations:
-    - key: app
-      value: {{ .Values.karpenter.requirements.appValue }}
-      effect: NoSchedule
   labels:
     provisioned: karpenter
   requirements:
@@ -33,7 +29,7 @@ spec:
       values: {{ .Values.karpenter.capacityTypes }}
   limits:
     resources:
-      cpu: {{ .Values.karpenter.limits.cpu }}
+      cpu: {{ .Valumms-data-dev-jupyterhubes.karpenter.limits.cpu }}
       memory: {{ .Values.karpenter.limits.memory }} 
   provider:
     subnetSelector:
