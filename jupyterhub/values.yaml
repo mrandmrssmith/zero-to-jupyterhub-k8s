@@ -329,7 +329,11 @@ karpenter:
   limits:
     cpu:
     memory:
-  provider: {}
+  provider: 
+    subnetSelector:
+      karpenter.sh/discovery:
+    securityGroupSelector: 
+      karpenter.sh/discovery:
 
 singleuser:
   podNameTemplate:
