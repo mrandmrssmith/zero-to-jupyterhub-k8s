@@ -332,7 +332,8 @@ karpenter:
   provider: 
     subnetSelector:
       karpenter.sh/discovery:
-
+    securityGroupSelector:
+      karpenter.sh/discovery:
 singleuser:
   podNameTemplate:
   extraTolerations: []
