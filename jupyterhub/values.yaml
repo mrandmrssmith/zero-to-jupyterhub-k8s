@@ -331,7 +331,6 @@ karpenter:
     memory:
   provider:
     subnetSelector:
-    securityGroupSelector:
 
 singleuser:
   podNameTemplate:
