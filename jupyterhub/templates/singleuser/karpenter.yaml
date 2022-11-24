@@ -12,6 +12,10 @@ spec:
     - key: app
       value: {{ .Values.karpenter.requirements.appValue }}
       effect: NoSchedule
+  tolerations:
+    - key: app
+      value: {{ .Values.karpenter.requirements.appValue }}
+      effect: NoSchedule
   labels:
     provisioned: karpenter
   requirements:
