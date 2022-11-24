@@ -33,5 +33,4 @@ spec:
       memory: {{ .Values.karpenter.limits.memory }} 
   provider:
     subnetSelector: {{ .Values.karpenter.provider.subnetSelector }} 
-    securityGroupSelector: {{ .Values.karpenter.provider.securityGroupSelector }} 
 {{- end }}
