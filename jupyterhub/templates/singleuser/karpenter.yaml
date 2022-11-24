@@ -29,7 +29,7 @@ spec:
       values: {{ .Values.karpenter.capacityTypes }}
   limits:
     resources:
-      cpu: {{ .Values..karpenter.limits.cpu }}
+      cpu: {{ .Values.karpenter.limits.cpu }}
       memory: {{ .Values.karpenter.limits.memory }} 
   provider:
     subnetSelector:
