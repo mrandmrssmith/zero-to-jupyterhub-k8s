@@ -26,14 +26,12 @@ spec:
       values: {{ .Values.karpenter.requirements.arch }}
     - key: "karpenter.sh/capacity-type" 
       operator: In
-      values: {{ .Values.karpenter.capacityTypes }}
+      values: {{ .Values.karpenter.requirements.capacityTypes }}
   limits:
     resources:
       cpu: {{ .Values.karpenter.limits.cpu }}
       memory: {{ .Values.karpenter.limits.memory }} 
   provider:
-    subnetSelector:
-      {{ .Values.karpenter.provider.subnetSelector }} 
-    securityGroupSelector:
-      {{ .Values.karpenter.provider.securityGroupSelector }} 
+    subnetSelector: {{ .Values.karpenter.provider.subnetSelector }} 
+    securityGroupSelector: {{ .Values.karpenter.provider.securityGroupSelector }} 
 {{- end }}
