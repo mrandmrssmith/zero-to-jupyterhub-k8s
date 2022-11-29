@@ -33,7 +33,7 @@ spec:
       memory: {{ .Values.karpenter.limits.memory }} 
   provider:
     subnetSelector:
-        karpenter.sh/discovery: {{ index .Values "karpenter" "provider" "subnetSelector" "karpenter.sh/discovery" }}
+        karpenter.sh/discovery: {{ index .Values "karpenter" "provider" "subnetSelector" "karpenter.sh/discovery/mms-data-dev" }}
     securityGroupSelector:
-        karpenter.sh/discovery: {{ index .Values "karpenter" "provider" "securityGroupSelector" "karpenter.sh/discovery" }}
+        karpenter.sh/discovery: {{ index .Values "karpenter" "provider" "securityGroupSelector" "karpenter.sh/discovery/mms-data-dev" }}
 {{- end }}
