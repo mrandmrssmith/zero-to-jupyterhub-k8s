@@ -11,7 +11,7 @@ spec:
   taints:
     - key: app
       value: {{ .Values.karpenter.requirements.appValue }}
-      effect: NoSchedule
+      effect: PreferNoSchedule
   labels:
     provisioned: karpenter
   requirements:
