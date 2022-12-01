@@ -22,7 +22,7 @@ spec:
       values: {{ .Values.karpenter.requirements.instanceTypes | toJson }}
     - key: "topology.kubernetes.io/zone"
       operator: In
-      values: {{ .Values.karpenter.requirements.regions | toJson }}
+      values: {{ .Values.karpenter.requirements.zones | toJson }}
     - key: "kubernetes.io/arch"
       operator: In
       values: {{ .Values.karpenter.requirements.arch | toJson }}
