@@ -40,5 +40,4 @@ spec:
         karpenter.sh/discovery: {{ index .Values "karpenter" "provider" "securityGroupSelector" "karpenter.sh/discovery" }}
     tags:
         provisioned: karpenter
-        
 {{- end }}
