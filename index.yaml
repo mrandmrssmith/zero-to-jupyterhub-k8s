@@ -3,9 +3,9 @@ entries:
   jupyterhub:
   - apiVersion: v2
     appVersion: 3.0.0
-    created: "2022-12-02T12:47:15.886054704Z"
+    created: "2022-12-02T13:31:58.776180374Z"
     description: Multi-user Jupyter installation
-    digest: 5d033cc1fdb1cf33d68fdf3090a055c2e61f801b29a1f62f2a773e7580c67840
+    digest: 3e205963bed0aca96d21a5885a55e3966e5fdb23ab4f7378c8f7fd18105df3f1
     home: https://z2jh.jupyter.org
     icon: https://jupyterhub.github.io/helm-chart/images/hublogo.svg
     keywords:
@@ -22,6 +22,6 @@ entries:
     sources:
     - https://github.com/jupyterhub/zero-to-jupyterhub-k8s
     urls:
-    - https://github.com/mrandmrssmith/zero-to-jupyterhub-k8s/releases/download/jupyterhub-0.0.1-set.by.chartpress/jupyterhub-0.0.1-set.by.chartpress.tgz
+    - https://mrandmrssmith.github.io/zero-to-jupyterhub-k8s/jupyterhub-0.0.1-set.by.chartpress.tgz
     version: 0.0.1-set.by.chartpress
-generated: "2022-12-02T12:47:15.886070504Z"
+generated: "2022-12-02T13:31:58.77173716Z"
