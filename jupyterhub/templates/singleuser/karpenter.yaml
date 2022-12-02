@@ -34,8 +34,8 @@ spec:
       cpu: {{ .Values.karpenter.limits.cpu }}
       memory: {{ .Values.karpenter.limits.memory }} 
   provider:
-    subnetSelector: {{ .Values.karpenter.provider.subnetSelector.karpenter\.sh/discovery  }}
-    securityGroupSelector: {{ .Values.karpenter.provider.securityGroupSelector.karpenter\.sh/discovery }}
+    subnetSelector: {{ index .Values.karpenter.provider.subnetSelector "karpenter.sh/discovery"  }}
+    securityGroupSelector: {{ index .Values.karpenter.provider.securityGroupSelector "karpenter.sh/discovery" }}
     tags:
         provisioned: karpenter
 {{- end }}
