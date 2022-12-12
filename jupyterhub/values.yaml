@@ -79,7 +79,7 @@ hub:
   extraVolumeMounts: []
   image:
     name: jupyterhub/k8s-hub
-    tag: "set-by-chartpress"
+    tag: "2.0.0" #"set-by-chartpress"
     pullPolicy:
     pullSecrets: []
   resources: {}
@@ -294,7 +294,7 @@ proxy:
       allowPrivilegeEscalation: false
     image:
       name: jupyterhub/k8s-secret-sync
-      tag: "set-by-chartpress"
+      tag: "2.0.0" #"set-by-chartpress"
       pullPolicy:
       pullSecrets: []
     resources: {}
@@ -318,22 +318,7 @@ proxy:
 
 # singleuser relates to the configuration of KubeSpawner which runs in the hub
 # pod, and its spawning of user pods such as jupyter-myusername.
-karpenter:
-  enabled: false
-  requirements:
-    appValue:
-    instanceTypes: []
-    regions: []
-    arch: []
-    capacityTypes: []
-  limits:
-    cpu:
-    memory:
-  provider: 
-    subnetSelector:
-      karpenter.sh/discovery:
-    securityGroupSelector:
-      karpenter.sh/discovery:
+
 singleuser:
   podNameTemplate:
   extraTolerations: []
@@ -350,7 +335,7 @@ singleuser:
   networkTools:
     image:
       name: jupyterhub/k8s-network-tools
-      tag: "set-by-chartpress"
+      tag: "2.0.0" #"set-by-chartpress"
       pullPolicy:
       pullSecrets: []
     resources: {}
@@ -400,7 +385,7 @@ singleuser:
       storageAccessModes: [ReadWriteOnce]
   image:
     name: jupyterhub/k8s-singleuser-sample
-    tag: "set-by-chartpress"
+    tag: "2.0.0" #"set-by-chartpress"
     pullPolicy:
     pullSecrets: []
   startTimeout: 300
@@ -608,7 +593,7 @@ prePuller:
     # image and the configuration below relates to the hook-image-awaiter Job
     image:
       name: jupyterhub/k8s-image-awaiter
-      tag: "set-by-chartpress"
+      tag: "2.0.0" #"set-by-chartpress"
       pullPolicy:
       pullSecrets: []
     containerSecurityContext:
