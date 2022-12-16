@@ -404,6 +404,7 @@ singleuser:
   profileList: []
   karpenter:
     enabled: false
+    ReleaseName:
     taints: []
     requirements:
       instanceTypes: []
