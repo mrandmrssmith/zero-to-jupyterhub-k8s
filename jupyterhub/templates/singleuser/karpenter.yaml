@@ -2,16 +2,22 @@
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
 metadata:
-  name: {{ include "jupyterhub.singleuser.fullname" . }}
+  name: {{ .Release.Name }}-karpenter
   labels: 
-    {{- include "jupyterhub.labels" . | nindent 4 }}
+    tier: karpenter-jupyter-hub
+    app_name: {{ .Chart.Name }}
+    app_version: {{ .Chart.Version | toString }}
+    release: {{ .Release.Name }}
     provisioned: karpenter
 spec:
   ttlSecondsUntilExpired: 2592000 # 30 Days=60*60*24*30 Seconds;
   ttlSecondsAfterEmpty: 30
   taints: {{ .Values.singleuser.karpenter.taints | toJson }}
   labels: 
-    {{- include "jupyterhub.labels" . | nindent 4 }}
+    tier: karpenter-jupyter-hub
+    app_name: {{ .Chart.Name }}
+    app_version: {{ .Chart.Version | toString }}
+    release: {{ .Release.Name }}
     provisioned: karpenter
   requirements:
     - key: "node.kubernetes.io/instance-type"
