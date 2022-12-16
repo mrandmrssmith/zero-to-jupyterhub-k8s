@@ -402,6 +402,20 @@ singleuser:
   defaultUrl:
   extraPodConfig: {}
   profileList: []
+  karpenter:
+    enabled: false
+    taints: []
+    requirements:
+      instanceTypes: []
+      regions: []
+      arch: []
+      capacityTypes: []
+    limits:
+      cpu:
+      memory:
+    provider: 
+      subnetSelector: {}
+      securityGroupSelector: {}
 
 # scheduling relates to the user-scheduler pods and user-placeholder pods.
 scheduling:

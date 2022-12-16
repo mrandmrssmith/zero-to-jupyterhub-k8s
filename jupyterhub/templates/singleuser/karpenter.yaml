@@ -9,10 +9,7 @@ metadata:
 spec:
   ttlSecondsUntilExpired: 2592000 # 30 Days=60*60*24*30 Seconds;
   ttlSecondsAfterEmpty: 30
-  taints: 
-    {{- with .Values.singleuser.karpenter.taints}}
-    {{- . | toYaml | nindent 4 }}
-    {{- end }}
+  taints: {{ .Values.singleuser.karpenter.taints | toJson }}
   labels: 
     {{- include "jupyterhub.labels" . | nindent 4 }}
     provisioned: karpenter
@@ -35,13 +32,9 @@ spec:
       memory: {{ .Values.singleuser.karpenter.limits.memory }} 
   provider:
     subnetSelector: 
-        {{- with .Values.singleuser.karpenter.provider.subnetSelector }}
-        {{- . | toYaml | nindent 8 }}
-        {{- end }}
+      {{ .Values.singleuser.karpenter.provider.subnetSelector | toYaml | nindent 6  }}
     securityGroupSelector: 
-        {{- with .Values.singleuser.karpenter.provider.securityGroupSelector }}
-        {{- . | toYaml | nindent 8 }}
-        {{- end }}
+      {{ .Values.singleuser.karpenter.provider.securityGroupSelector | toYaml | nindent 6 }}
     tags:
         provisioned: karpenter
 {{- end }}
