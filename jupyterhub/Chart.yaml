@@ -2,7 +2,7 @@
 apiVersion: v2
 name: jupyterhub
 version: 1.0.0
-appVersion: "2.0.0"
+appVersion: "3.0.0"
 description: Multi-user Jupyter installation
 keywords: [jupyter, jupyterhub, z2jh]
 home: https://z2jh.jupyter.org
