@@ -6,13 +6,9 @@ Permissions to be used by the hook-image-awaiter job
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ .Values.singleuser.karpenter.ReleaseName }}
+  name: {{ include "jupyterhub.hook-image-awaiter.fullname" . }}
   labels:
-    tier: karpenter-jupyterhub
-    app_name: {{ .Chart.Name }}
-    app_version: {{ .Chart.Version | toString }}
-    release: {{ .Values.singleuser.karpenter.ReleaseName }}
-    provisioned: karpenter
+    {{- include "jupyterhub.labels" . | nindent 4 }}
     hub.jupyter.org/deletable: "true"
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade
@@ -29,13 +25,9 @@ rules:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ .Values.singleuser.karpenter.ReleaseName }}
+  name: {{ include "jupyterhub.hook-image-awaiter.fullname" . }}
   labels:
-    tier: karpenter-jupyterhub
-    app_name: {{ .Chart.Name }}
-    app_version: {{ .Chart.Version | toString }}
-    release: {{ .Values.singleuser.karpenter.ReleaseName }}
-    provisioned: karpenter
+    {{- include "jupyterhub.labels" . | nindent 4 }}
     hub.jupyter.org/deletable: "true"
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade
