@@ -3,6 +3,11 @@
 fullnameOverride: ""
 nameOverride:
 
+# enabled is ignored by the jupyterhub chart itself, but a chart depending on
+# the jupyterhub chart conditionally can make use this config option as the
+# condition.
+enabled:
+
 # custom can contain anything you want to pass to the hub pod, as all passed
 # Helm template values will be made available there.
 custom: {}
@@ -61,7 +66,7 @@ hub:
       annotations: {}
       selector: {}
       accessModes:
-        - ReadWriteOnce
+      - ReadWriteOnce
       storage: 1Gi
       subPath:
       storageClassName:
@@ -78,7 +83,7 @@ hub:
   extraVolumes: []
   extraVolumeMounts: []
   image:
-    name: jupyterhub/k8s-hub
+    name: quay.io/jupyterhub/k8s-hub
     tag: "2.0.0" #"set-by-chartpress"
     pullPolicy:
     pullSecrets: []
@@ -102,6 +107,8 @@ hub:
     egress: []
     egressAllowRules:
       cloudMetadataServer: true
+      dnsPortsCloudMetadataServer: true
+      dnsPortsKubeSystemNamespace: true
       dnsPortsPrivateIPs: true
       nonPrivateIPs: true
       privateIPs: true
@@ -194,11 +201,11 @@ proxy:
       runAsGroup: 65534 # nobody group
       allowPrivilegeEscalation: false
     image:
-      name: jupyterhub/configurable-http-proxy
+      name: quay.io/jupyterhub/configurable-http-proxy
       # tag is automatically bumped to new patch versions by the
       # watch-dependencies.yaml workflow.
       #
-      tag: "4.5.3" # https://github.com/jupyterhub/configurable-http-proxy/tags
+      tag: "4.6.1" # https://github.com/jupyterhub/configurable-http-proxy/tags
       pullPolicy:
       pullSecrets: []
     extraCommandLineFlags: []
@@ -226,6 +233,8 @@ proxy:
       egress: []
       egressAllowRules:
         cloudMetadataServer: true
+        dnsPortsCloudMetadataServer: true
+        dnsPortsKubeSystemNamespace: true
         dnsPortsPrivateIPs: true
         nonPrivateIPs: true
         privateIPs: true
@@ -249,7 +258,7 @@ proxy:
       # tag is automatically bumped to new patch versions by the
       # watch-dependencies.yaml workflow.
       #
-      tag: "v2.9.5" # ref: https://hub.docker.com/_/traefik?tab=tags
+      tag: "v3.0.0" # ref: https://hub.docker.com/_/traefik?tab=tags
       pullPolicy:
       pullSecrets: []
     hsts:
@@ -273,6 +282,8 @@ proxy:
       egress: []
       egressAllowRules:
         cloudMetadataServer: true
+        dnsPortsCloudMetadataServer: true
+        dnsPortsKubeSystemNamespace: true
         dnsPortsPrivateIPs: true
         nonPrivateIPs: true
         privateIPs: true
@@ -293,7 +304,7 @@ proxy:
       runAsGroup: 65534 # nobody group
       allowPrivilegeEscalation: false
     image:
-      name: jupyterhub/k8s-secret-sync
+      name: quay.io/jupyterhub/k8s-secret-sync
       tag: "2.0.0" #"set-by-chartpress"
       pullPolicy:
       pullSecrets: []
@@ -334,7 +345,7 @@ singleuser:
     preferred: []
   networkTools:
     image:
-      name: jupyterhub/k8s-network-tools
+      name: quay.io/jupyterhub/k8s-network-tools
       tag: "2.0.0" #"set-by-chartpress"
       pullPolicy:
       pullSecrets: []
@@ -350,6 +361,8 @@ singleuser:
     egress: []
     egressAllowRules:
       cloudMetadataServer: false
+      dnsPortsCloudMetadataServer: true
+      dnsPortsKubeSystemNamespace: true
       dnsPortsPrivateIPs: true
       nonPrivateIPs: true
       privateIPs: false
@@ -384,7 +397,7 @@ singleuser:
       volumeNameTemplate: volume-{username}{servername}
       storageAccessModes: [ReadWriteOnce]
   image:
-    name: jupyterhub/k8s-singleuser-sample
+    name: quay.io/jupyterhub/k8s-singleuser-sample
     tag: "2.0.0" #"set-by-chartpress"
     pullPolicy:
     pullSecrets: []
@@ -413,7 +426,7 @@ singleuser:
     limits:
       cpu:
       memory:
-    provider: 
+    provider:
       subnetSelector: {}
       securityGroupSelector: {}
 
@@ -451,44 +464,44 @@ scheduling:
         # - NodeResourcesBalancedAllocation
         #
         disabled:
-          # We disable these plugins (with regards to scoring) to not interfere
-          # or complicate our use of NodeResourcesFit.
-          - name: NodeResourcesBalancedAllocation
-          # Disable plugins to be allowed to enable them again with a different
-          # weight and avoid an error.
-          - name: NodeAffinity
-          - name: InterPodAffinity
-          - name: NodeResourcesFit
-          - name: ImageLocality
+        # We disable these plugins (with regards to scoring) to not interfere
+        # or complicate our use of NodeResourcesFit.
+        - name: NodeResourcesBalancedAllocation
+        # Disable plugins to be allowed to enable them again with a different
+        # weight and avoid an error.
+        - name: NodeAffinity
+        - name: InterPodAffinity
+        - name: NodeResourcesFit
+        - name: ImageLocality
         enabled:
-          - name: NodeAffinity
-            weight: 14631
-          - name: InterPodAffinity
-            weight: 1331
-          - name: NodeResourcesFit
-            weight: 121
-          - name: ImageLocality
-            weight: 11
+        - name: NodeAffinity
+          weight: 14631
+        - name: InterPodAffinity
+          weight: 1331
+        - name: NodeResourcesFit
+          weight: 121
+        - name: ImageLocality
+          weight: 11
     pluginConfig:
-      # Here we declare that we should optimize pods to fit based on a
-      # MostAllocated strategy instead of the default LeastAllocated.
-      - name: NodeResourcesFit
-        args:
-          scoringStrategy:
-            resources:
-              - name: cpu
-                weight: 1
-              - name: memory
-                weight: 1
-            type: MostAllocated
+    # Here we declare that we should optimize pods to fit based on a
+    # MostAllocated strategy instead of the default LeastAllocated.
+    - name: NodeResourcesFit
+      args:
+        scoringStrategy:
+          resources:
+          - name: cpu
+            weight: 1
+          - name: memory
+            weight: 1
+          type: MostAllocated
     containerSecurityContext:
       runAsUser: 65534 # nobody user
       runAsGroup: 65534 # nobody group
       allowPrivilegeEscalation: false
     image:
       # IMPORTANT: Bumping the minor version of this binary should go hand in
-      #            hand with an inspection of the user-scheduelrs RBAC resources
-      #            that we have forked in
+      #            hand with an inspection of the user-scheduelr's RBAC
+      #            resources that we have forked in
       #            templates/scheduling/user-scheduler/rbac.yaml.
       #
       #            Debugging advice:
@@ -518,9 +531,10 @@ scheduling:
       # tag is automatically bumped to new patch versions by the
       # watch-dependencies.yaml workflow. The minor version is pinned in the
       # workflow, and should be updated there if a minor version bump is done
-      # here.
+      # here. We aim to stay around 1 minor version behind the latest k8s
+      # version.
       #
-      tag: "v1.25.4" # ref: https://github.com/kubernetes/website/blob/main/content/en/releases/patch-releases.md
+      tag: "v1.28.9" # ref: https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG
       pullPolicy:
       pullSecrets: []
     nodeSelector: {}
@@ -566,26 +580,26 @@ scheduling:
     resources: {}
   corePods:
     tolerations:
-      - key: hub.jupyter.org/dedicated
-        operator: Equal
-        value: core
-        effect: NoSchedule
-      - key: hub.jupyter.org_dedicated
-        operator: Equal
-        value: core
-        effect: NoSchedule
+    - key: hub.jupyter.org/dedicated
+      operator: Equal
+      value: core
+      effect: NoSchedule
+    - key: hub.jupyter.org_dedicated
+      operator: Equal
+      value: core
+      effect: NoSchedule
     nodeAffinity:
       matchNodePurpose: prefer
   userPods:
     tolerations:
-      - key: hub.jupyter.org/dedicated
-        operator: Equal
-        value: user
-        effect: NoSchedule
-      - key: hub.jupyter.org_dedicated
-        operator: Equal
-        value: user
-        effect: NoSchedule
+    - key: hub.jupyter.org/dedicated
+      operator: Equal
+      value: user
+      effect: NoSchedule
+    - key: hub.jupyter.org_dedicated
+      operator: Equal
+      value: user
+      effect: NoSchedule
     nodeAffinity:
       matchNodePurpose: prefer
 
@@ -606,7 +620,7 @@ prePuller:
     pullOnlyOnChanges: true
     # image and the configuration below relates to the hook-image-awaiter Job
     image:
-      name: jupyterhub/k8s-image-awaiter
+      name: quay.io/jupyterhub/k8s-image-awaiter
       tag: "2.0.0" #"set-by-chartpress"
       pullPolicy:
       pullSecrets: []
