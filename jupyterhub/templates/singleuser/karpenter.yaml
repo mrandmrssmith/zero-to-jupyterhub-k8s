@@ -7,31 +7,31 @@ metadata:
 spec:
   template:
     metadata:
-      labels: {{- toYaml .Values.karpenter.NodePool.labels | nindent 8 }}
+      labels: {{- toYaml .Values.singleuser.karpenter.NodePool.labels | nindent 8 }}
     spec:
       nodeClassRef:
-        name: {{ .Values.karpenter.NodePool.nodeClassRef.name }}
+        name: {{ .Values.singleuser.karpenter.NodePool.nodeClassRef.name }}
       requirements:
         - key: "kubernetes.io/arch"
           operator: In
-          values: {{ .Values.karpenter.NodePool.requirements.arch | toJson }}
+          values: {{ .Values.singleuser.karpenter.NodePool.requirements.arch | toJson }}
         - key: "karpenter.sh/capacity-type"
           operator: In
-          values: {{ .Values.karpenter.NodePool.requirements.capacityTypes | toJson }}
+          values: {{ .Values.singleuser.karpenter.NodePool.requirements.capacityTypes | toJson }}
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
-          values: {{ .Values.karpenter.NodePool.requirements.instanceCategory | toJson }}
+          values: {{ .Values.singleuser.karpenter.NodePool.requirements.instanceCategory | toJson }}
         - key: "karpenter.k8s.aws/instance-family"
           operator: In
-          values: {{ .Values.karpenter.NodePool.requirements.instanceFamily | toJson }}
+          values: {{ .Values.singleuser.karpenter.NodePool.requirements.instanceFamily | toJson }}
         - key: "karpenter.k8s.aws/instance-cpu"
           operator: In
-          values: {{ .Values.karpenter.NodePool.requirements.instanceCPU | toJson }}
+          values: {{ .Values.singleuser.karpenter.NodePool.requirements.instanceCPU | toJson }}
         - key: "topology.kubernetes.io/zone"
           operator: In
-          values: {{ .Values.karpenter.NodePool.requirements.zones | toJson }}
-      taints: {{- toYaml .Values.karpenter.NodePool.taints | nindent 8 }}
+          values: {{ .Values.singleuser.karpenter.NodePool.requirements.zones | toJson }}
+      taints: {{- toYaml .Values.singleuser.karpenter.NodePool.taints | nindent 8 }}
   limits:
-    cpu: {{ .Values.karpenter.NodePool.limits.cpu }}
-    memory: {{ .Values.karpenter.NodePool.limits.memory }}
+    cpu: {{ .Values.singleuser.karpenter.NodePool.limits.cpu }}
+    memory: {{ .Values.singleuser.karpenter.NodePool.limits.memory }}
 {{- end }}
