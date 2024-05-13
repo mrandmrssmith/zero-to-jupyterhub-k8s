@@ -3,6 +3,18 @@
 fullnameOverride: ""
 nameOverride:
 
+karpenter:
+    enabled: false
+    NodePool:
+      clusterName: ""
+      requirements:
+        instanceTypes: []
+        zones: []
+        arch: []
+        capacityTypes: []
+      limits:
+        cpu: "1000000m"
+        memory: "100Gi"
 
 # enabled is ignored by the jupyterhub chart itself, but a chart depending on
 # the jupyterhub chart conditionally can make use this config option as the
