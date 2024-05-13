@@ -3,7 +3,7 @@
 apiVersion: karpenter.sh/v1beta1
 kind: NodePool
 metadata:
-  name: {{ .Values.karpenter.NodePool.name }}
+  name: {{ .Values.singleuser.karpenter.NodePool.name }}
 spec:
   template:
     metadata:
