@@ -3,6 +3,29 @@ entries:
   jupyterhub:
   - apiVersion: v2
     appVersion: 3.0.0
+    created: "2024-05-13T13:13:20.889491491Z"
+    description: Multi-user Jupyter installation
+    digest: c56432324093d543a661f8648bf42b179f47a270e79aa4cf72cd8982c1436b53
+    home: https://z2jh.jupyter.org
+    icon: https://hub.jupyter.org/helm-chart/images/hublogo.svg
+    keywords:
+    - jupyter
+    - jupyterhub
+    - z2jh
+    kubeVersion: '>=1.26.0-0'
+    maintainers:
+    - email: erik@sundellopensource.se
+      name: Erik Sundell
+    - name: Simon Li
+      url: https://github.com/manics/
+    name: jupyterhub
+    sources:
+    - https://github.com/jupyterhub/zero-to-jupyterhub-k8s
+    urls:
+    - https://github.com/mrandmrssmith/zero-to-jupyterhub-k8s/releases/download/jupyterhub-1.0.6-dev/jupyterhub-1.0.6-dev.tgz
+    version: 1.0.6-dev
+  - apiVersion: v2
+    appVersion: 3.0.0
     created: "2024-05-13T12:28:30.300323789Z"
     description: Multi-user Jupyter installation
     digest: 4b0537b812d1a0a22639be66ab33c45f4458c3ac4b589b7bae399d73380402c4
@@ -139,4 +162,4 @@ entries:
     urls:
     - https://github.com/mrandmrssmith/zero-to-jupyterhub-k8s/releases/download/jupyterhub-1.0.0-dev/jupyterhub-1.0.0-dev.tgz
     version: 1.0.0-dev
-generated: "2024-05-13T12:28:30.30036156Z"
+generated: "2024-05-13T13:13:20.889541484Z"
