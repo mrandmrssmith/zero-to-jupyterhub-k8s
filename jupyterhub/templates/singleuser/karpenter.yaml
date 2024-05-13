@@ -1,4 +1,4 @@
-{{- if .Values.karpenter.enabled -}}
+{{- if .Values.singleuser.karpenter.enabled -}}
 ---
 apiVersion: karpenter.sh/v1beta1
 kind: NodePool
