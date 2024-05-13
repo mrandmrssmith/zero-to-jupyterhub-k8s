@@ -3,19 +3,6 @@
 fullnameOverride: ""
 nameOverride:
 
-# Karpenter provisioner parameters
-karpenter:
-  enabled: false
-  NodePool:
-    clusterName: ""
-    requirements:
-      instanceTypes: []
-      zones: []
-      arch: []
-      capacityTypes: []
-    limits:
-      cpu: "1000000m"
-      memory: "100Gi"
 
 # enabled is ignored by the jupyterhub chart itself, but a chart depending on
 # the jupyterhub chart conditionally can make use this config option as the
@@ -431,18 +418,16 @@ singleuser:
   profileList: []
   karpenter:
     enabled: false
-    taints: []
-    requirements:
-      instanceTypes: []
-      regions: []
-      arch: []
-      capacityTypes: []
-    limits:
-      cpu:
-      memory:
-    provider:
-      subnetSelector: {}
-      securityGroupSelector: {}
+    NodePool:
+      clusterName: ""
+      requirements:
+        instanceTypes: []
+        zones: []
+        arch: []
+        capacityTypes: []
+      limits:
+        cpu: "1000000m"
+        memory: "100Gi"
 
 # scheduling relates to the user-scheduler pods and user-placeholder pods.
 scheduling:
