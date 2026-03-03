@@ -111,6 +111,7 @@ RUN apt-get update \
         git \
         less \
         vim \
+        ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_USER}
